@@ -1,20 +1,30 @@
 'use strict';
+const echarts = require('echarts');
 const dataZoom = require('./dataZoom');
 const grid = require('./grid');
 const legend = require('./legend');
 const series = require('./series');
 const tooltip = require('./tooltip');
+const title = require('./title');
 const xAxis = require('./xAxis');
 const yAxis = require('./yAxis');
 
-
 function Builder({container}) {
+  this.container = container;
+  this.charts = null;
   this.option = {
     animationDuration: 100,
     grid: grid(),
     series: []
   };
 }
+Builder.prototype.title = function(t) {
+  if (typeof t === 'string' || typeof t === 'number') {
+    t = {text: t};
+  }
+  this.option.title = title(t);
+  return this;
+};
 Builder.prototype.color = function(colors) {
   if (!colors instanceof Array) {
     console.error('colors is array');
@@ -28,7 +38,7 @@ Builder.prototype.dataZoom = function(dz) {
 };
 Builder.prototype.grid = function(gr) {
   if (gr instanceof Array) {
-    this.option.grid = gr.map(g => grid(g));
+    this.option.grid = gr.map((g) => grid(g));
   } else {
     this.option.grid = grid(gr);
   }
@@ -40,18 +50,19 @@ Builder.prototype.legend = function(le) {
 };
 Builder.prototype.series = function(se) {
   if (se instanceof Array) {
-    this.option.series = se.map(s => series[s.type]);
+    this.option.series = se.map((s) => series[s.type](s));
   } else {
-    this.option.series = [series[se.type]];
+    this.option.series = [series[se.type](se)];
   }
+  return this;
 };
 Builder.prototype.tooltip = function(tt) {
-  this.option.legend = tooltip(tt);
+  this.option.tooltip = tooltip(tt);
   return this;
 };
 Builder.prototype.xAxis = function(xa) {
   if (xa instanceof Array) {
-    this.option.xAxis = xa.map(x => xAxis(x));
+    this.option.xAxis = xa.map((x) => xAxis(x));
   } else {
     this.option.xAxis = xAxis(xa);
   }
@@ -59,15 +70,28 @@ Builder.prototype.xAxis = function(xa) {
 };
 Builder.prototype.yAxis = function(ya) {
   if (ya instanceof Array) {
-    this.option.yAxis = ya.map(y => yAxis(y));
+    this.option.yAxis = ya.map((y) => yAxis(y));
   } else {
     this.option.yAxis = yAxis(ya);
   }
   return this;
 };
-Builder.prototype.render = function() {
-
+Builder.prototype.resize = function() {
+  if (this.charts) {
+    this.charts.resize();
+  }
+};
+Builder.prototype.dispose = function() {
+  if (this.container && this.charts) {
+    echarts.dispose(this.container);
+  }
+};
+Builder.prototype.render = function(options, merge = true) {
+  if (!this.charts) {
+    this.charts = echarts.init(this.container);
+  }
+  options = options || this.option;
+  this.charts.setOption(options, merge);
+  return this;
 };
 exports = module.exports = Builder;
-
-

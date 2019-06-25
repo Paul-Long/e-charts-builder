@@ -2,7 +2,7 @@
 
 const clone = require('lodash/defaultsDeep');
 
-exports = module.exports = function(legend) {
+exports = module.exports = function(title) {
   return clone(
     {
       textStyle: {
@@ -10,6 +10,6 @@ exports = module.exports = function(legend) {
         fontSize: 12
       }
     },
-    legend
+    title
   );
 };
