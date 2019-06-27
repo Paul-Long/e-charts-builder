@@ -3,13 +3,11 @@
 const clone = require('lodash/defaultsDeep');
 
 exports = module.exports = function(title) {
-  return clone(
-    {
+  return clone(title, {
       textStyle: {
         color: '#FFEBC8',
         fontSize: 12
       }
-    },
-    title
+    }
   );
 };

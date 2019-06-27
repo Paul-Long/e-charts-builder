@@ -1,6 +1,6 @@
 {
   "name": "e-charts-builder",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "echarts builder",
   "main": "index.js",
   "scripts": {

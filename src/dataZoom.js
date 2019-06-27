@@ -6,8 +6,7 @@ exports = module.exports = function(dataZoom) {
   dataZoom = dataZoom || [];
   return dataZoom.map((dz) => {
     if (dz.type === 'slider') {
-      return clone(
-        {
+      return clone( dz, {
           type: 'slider',
           show: true,
           showDetail: false,
@@ -28,11 +27,10 @@ exports = module.exports = function(dataZoom) {
           handleStyle: {
             color: '#193D37'
           }
-        },
-        dz
+        }
       );
     } else {
-      return clone({type: 'inside'}, dz);
+      return clone(dz, {type: 'inside'});
     }
   });
 };

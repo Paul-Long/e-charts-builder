@@ -2,8 +2,7 @@
 const clone = require('lodash/defaultsDeep');
 
 exports = module.exports = function(tooltip) {
-  return clone(
-    {
+  return clone(tooltip, {
       show: true,
       trigger: 'axis',
       axisPointer: {
@@ -20,7 +19,6 @@ exports = module.exports = function(tooltip) {
         color: '#FFEBC8'
       },
       extraCssText: 'box-shadow:0 0 4px 0 rgba(0,0,0,0.50);border-radius: 2px;border: 1px solid #308376;'
-    },
-    tooltip
+    }
   );
 };

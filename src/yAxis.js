@@ -2,8 +2,7 @@
 const clone = require('lodash/defaultsDeep');
 
 exports = module.exports = function(yAxis) {
-  return clone(
-    {
+  return clone(yAxis, {
       type: 'value',
       axisLabel: {
         show: true,
@@ -29,7 +28,6 @@ exports = module.exports = function(yAxis) {
         fontSize: 12
       },
       z: 1
-    },
-    yAxis
+    }
   );
 };

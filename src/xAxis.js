@@ -2,8 +2,7 @@
 const clone = require('lodash/defaultsDeep');
 
 exports = module.exports = function(xAxis) {
-  return clone(
-    {
+  return clone(xAxis, {
       type: 'category',
       offset: 1,
       axisLabel: {
@@ -31,7 +30,6 @@ exports = module.exports = function(xAxis) {
           color: ['#121A19', '#172422']
         }
       }
-    },
-    xAxis
+    }
   );
 };
