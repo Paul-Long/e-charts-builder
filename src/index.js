@@ -50,9 +50,18 @@ Builder.prototype.legend = function(le) {
 };
 Builder.prototype.series = function(se) {
   if (se instanceof Array) {
-    this.option.series = se.map((s) => series[s.type](s));
+    this.option.series = se.map((s) => {
+      if (series[s.type]) {
+        return series[s.type](s)
+      }
+      return s;
+    });
   } else {
-    this.option.series = [series[se.type](se)];
+    if (series[se.type]) {
+      this.option.series = [series[se.type](se)];
+    } else {
+      this.option.series = [se];
+    }
   }
   return this;
 };
