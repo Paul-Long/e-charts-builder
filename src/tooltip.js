@@ -5,14 +5,6 @@ exports = module.exports = function(tooltip) {
   return clone(tooltip, {
       show: true,
       trigger: 'axis',
-      axisPointer: {
-        type: 'line',
-        lineStyle: {
-          color: 'rgb(97,149,141)',
-          width: 1,
-          opacity: 0.3
-        }
-      },
       backgroundColor: '#193D37',
       padding: [4, 10],
       textStyle: {

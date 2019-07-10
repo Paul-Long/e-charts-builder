@@ -8,6 +8,7 @@ const tooltip = require('./tooltip');
 const title = require('./title');
 const xAxis = require('./xAxis');
 const yAxis = require('./yAxis');
+const axisPointer = require('./axisPointer');
 
 function Builder({container}) {
   this.container = container;
@@ -46,6 +47,10 @@ Builder.prototype.grid = function(gr) {
 };
 Builder.prototype.legend = function(le) {
   this.option.legend = legend(le);
+  return this;
+};
+Builder.prototype.axisPointer = function(ap) {
+  this.option.axisPointer = axisPointer(ap);
   return this;
 };
 Builder.prototype.series = function(se) {
@@ -94,6 +99,24 @@ Builder.prototype.dispose = function() {
   if (this.container && this.charts) {
     echarts.dispose(this.container);
   }
+};
+Builder.prototype.animation = function(animation) {
+  animation = animation || {};
+  for (let key in animation) {
+    if (Object.prototype.hasOwnProperty.call(animation, key)) {
+      this.option[key] = animation[key];
+    }
+  }
+  return this;
+};
+Builder.prototype.setOption = function(option) {
+  option = option || {};
+  for (let key in option) {
+    if (Object.prototype.hasOwnProperty.call(option, key)) {
+      this.option[key] = option[key];
+    }
+  }
+  return this;
 };
 Builder.prototype.render = function(options, merge = true) {
   if (!this.charts) {
