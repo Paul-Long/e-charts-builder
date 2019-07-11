@@ -118,6 +118,9 @@ Builder.prototype.setOption = function(option) {
   }
   return this;
 };
+Builder.prototype.instance = function() {
+  return this.charts;
+};
 Builder.prototype.render = function(options, merge = true) {
   if (!this.charts) {
     this.charts = echarts.init(this.container);
