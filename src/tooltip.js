@@ -8,7 +8,8 @@ exports = module.exports = function(tooltip) {
       backgroundColor: '#193D37',
       padding: [4, 10],
       textStyle: {
-        color: '#FFEBC8'
+        color: '#FFEBC8',
+        fontSize: 12
       },
       extraCssText: 'box-shadow:0 0 4px 0 rgba(0,0,0,0.50);border-radius: 2px;border: 1px solid #308376;'
     }
