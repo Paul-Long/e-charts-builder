@@ -25,7 +25,7 @@ exports = module.exports = function(yAxis) {
       },
       nameTextStyle: {
         color: '#8F9598',
-        fontSize: 12
+        fontSize: 10
       },
       z: 1
     }
