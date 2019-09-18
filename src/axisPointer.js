@@ -6,9 +6,10 @@ exports = module.exports = function(axisPointer) {
   return clone(axisPointer, {
     link: {xAxisIndex: 'all'},
     lineStyle: {
-      color: 'rgb(97,149,141)',
       width: 1,
-      opacity: 0.3
+      color: '#FF9300',
+      type: 'dashed',
+      opacity: 1
     },
     label: {
       color: '#FFEBC8',

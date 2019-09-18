@@ -57,7 +57,7 @@ Builder.prototype.series = function(se) {
   if (se instanceof Array) {
     this.option.series = se.map((s) => {
       if (series[s.type]) {
-        return series[s.type](s)
+        return series[s.type](s);
       }
       return s;
     });
@@ -129,4 +129,15 @@ Builder.prototype.render = function(options, merge = true) {
   this.charts.setOption(options, merge);
   return this;
 };
-exports = module.exports = Builder;
+Builder.prototype.dispatchAction = function() {
+  if (this.charts) {
+    this.charts.dispatchAction(...arguments);
+  }
+};
+Builder.prototype.on = function() {
+  if (this.charts) {
+    this.charts.on(...arguments);
+  }
+};
+exports.Builder = Builder;
+module.exports = Builder;
