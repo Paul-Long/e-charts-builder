@@ -6,7 +6,7 @@ exports = module.exports = function(line) {
   return clone(line, {
       type: 'line',
       itemStyle: {
-        width: 1
+        // width: 1
       },
       lineStyle: {
         width: 1
