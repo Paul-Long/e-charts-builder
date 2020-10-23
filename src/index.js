@@ -9,6 +9,7 @@ const title = require('./title');
 const xAxis = require('./xAxis');
 const yAxis = require('./yAxis');
 const axisPointer = require('./axisPointer');
+const loading = require('./loading');
 
 function Builder({container}) {
   this.container = container;
@@ -137,6 +138,16 @@ Builder.prototype.dispatchAction = function() {
 Builder.prototype.on = function() {
   if (this.charts) {
     this.charts.on(...arguments);
+  }
+};
+Builder.prototype.showLoading = function(opt) {
+  if (this.charts) {
+    this.charts.showLoading('default', loading(opt || {}));
+  }
+};
+Builder.prototype.hideLoading = function() {
+  if (this.charts) {
+    this.charts.hideLoading();
   }
 };
 exports.Builder = Builder;
