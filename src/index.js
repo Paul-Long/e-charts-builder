@@ -14,6 +14,7 @@ const loading = require('./loading');
 function Builder({container}) {
   this.container = container;
   this.charts = null;
+  this.svg = false;
   this.option = {
     animationDuration: 100,
     grid: grid(),
@@ -124,7 +125,7 @@ Builder.prototype.instance = function() {
 };
 Builder.prototype.render = function(options, merge = true) {
   if (!this.charts) {
-    this.charts = echarts.init(this.container);
+    this.charts = echarts.init(this.container, null, {render: this.svg ? 'svg' : 'canvas'});
   }
   options = options || this.option;
   this.charts.setOption(options, merge);
@@ -149,6 +150,10 @@ Builder.prototype.hideLoading = function() {
   if (this.charts) {
     this.charts.hideLoading();
   }
+};
+Builder.prototype.useSvg = function() {
+  this.svg = true;
+  return this;
 };
 exports.Builder = Builder;
 module.exports = Builder;
